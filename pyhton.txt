@@ -1,0 +1,58 @@
+def welcome():
+    entry = int(input("""Welcome to Contact Book.
+    
+                      Contact book options:
+                    
+                      1. Create a New contact
+                      2. Display Your exiting contacts
+                      3. Delete an entry
+                      4. Exit
+                     Enter your entry here:  """))
+    
+  
+    return entry
+
+
+def phonebook():
+    contact = {}
+    while True:
+        entry = welcome()
+        if entry == 1:
+            phone_number = input('Please Enter a number: ')
+            contact_name = input('What would you like to Save the name as?"\n" Enter in the format "Name".: ')
+            if phone_number not in contact.items():
+                contact.update({contact_name:phone_number})
+                
+                print('Contact successfully saved')
+                for k, v in contact.items():
+                    print(k, '-->', v)
+            else:
+                print('That contact already exits in your Phonebook')
+        elif entry == 2:
+            if bool(contact) != False:
+                for k, v in contact.items():
+                    print(k, '-->', v)
+            else:
+                print('You have an empty phonebook! Go back to the menu to add a new contact')
+        elif entry == 3:
+            name = input('Enter the name of the contact you wish to delete: ')
+            if name in contact:
+                print('The contact is',name,':',contact[name])
+            else:
+                print('That contact does not exist! Return to the main menu to enter the contact')
+            confirm = input('Are you sure you wish to delete this contact? Yes/No: ')
+            if confirm.capitalize() == 'Yes':
+                contact.pop(name,None)
+                for k, v in contact.items():
+                    print('Your Updated Phonebook is shown below:')
+                    print(k, '-->', v)
+            else:
+                print('Return to Main Menu')
+        elif entry == 4:
+            print('Thanks for using the  Contact Book')
+            break
+        else:
+            print('Incorrect Entry!')
+            
+
+phonebook()
